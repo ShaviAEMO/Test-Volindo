@@ -7,7 +7,6 @@ export async function getPopularMovies() {
 
         if (responseData.success) {
             const popularMovies = responseData.data;
-            console.log(popularMovies);
             return popularMovies;
         } else {
             console.error('Error obteniendo películas populares:', responseData.message);
