@@ -1,18 +1,21 @@
 const axios = require("axios");
 
-
 const peliculasGet = async (req, res) => {
     try {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.APIKEY}`);
         const popularMovies = response.data.results;
-        res.json(popularMovies);
+        res.json({
+            success: true,
+            message: "Películas populares obtenidas exitosamente",
+            data: popularMovies
+        });
     } catch (error) {
         console.error('Error al obtener las películas populares:', error.message);
         res.status(500).json({ error: 'Ocurrió un error al obtener las películas populares' });
     }
 }
 
-const  buscadorPeliculas = async (req, res) => {
+const buscadorPeliculas = async (req, res) => {
     const { titulo } = req.query;
 
     if (!titulo) {
@@ -24,7 +27,11 @@ const  buscadorPeliculas = async (req, res) => {
             `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&query=${encodeURIComponent(titulo)}`
         );
         const matchingMovies = response.data.results;
-        res.json(matchingMovies);
+        res.json({
+            success: true,
+            message: `Resultados de búsqueda para '${titulo}'`,
+            data: matchingMovies
+        });
     } catch (error) {
         console.error('Error al buscar películas:', error.message);
         res.status(500).json({ error: 'Ocurrió un error al buscar películas' });
@@ -34,5 +41,5 @@ const  buscadorPeliculas = async (req, res) => {
 module.exports = {
     peliculasGet,
     buscadorPeliculas
-}
+};
 
