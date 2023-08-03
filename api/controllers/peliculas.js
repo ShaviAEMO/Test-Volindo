@@ -2,7 +2,8 @@ const axios = require("axios");
 
 const peliculasGet = async (req, res) => {
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.APIKEY}`);
+        const response =
+            await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.APIKEY}`);
         const popularMovies = response.data.results;
         res.json({
             success: true,

@@ -2,7 +2,6 @@ import React from 'react';
 
 function MovieCard({ movie }) {
     if (!movie.poster_path) {
-        // Manejo de caso en que no hay imagen disponible
         return (
             <div className="movie-card">
                 <div className="movie-details">
