@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const peliculasGet = async (req, res) => {
+const moviesGet = async (req, res) => {
     try {
         const response =
             await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.APIKEY}`);
@@ -16,7 +16,7 @@ const peliculasGet = async (req, res) => {
     }
 }
 
-const buscadorPeliculas = async (req, res) => {
+const searchMovie = async (req, res) => {
     const { titulo } = req.query;
 
     if (!titulo) {
@@ -64,8 +64,8 @@ const movieDetails = async (req, res) => {
 
 
 module.exports = {
-    peliculasGet,
-    buscadorPeliculas,
+    moviesGet,
+    searchMovie,
     movieDetails
 };
 

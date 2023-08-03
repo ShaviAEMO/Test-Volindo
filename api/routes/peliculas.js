@@ -1,12 +1,12 @@
 const {Router} = require('express');
-const {peliculasGet, buscadorPeliculas, movieDetails} = require('../controllers/peliculas')
+const {moviesGet, searchMovie, movieDetails} = require('../controllers/peliculas')
 
 const router = Router();
 
 
-router.get('/', peliculasGet);
+router.get('/', moviesGet);
 
-router.get('/buscar', buscadorPeliculas);
+router.get('/buscar', searchMovie);
 
 router.get('/movieDetails', movieDetails);
 
