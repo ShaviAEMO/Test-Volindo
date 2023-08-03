@@ -38,9 +38,34 @@ const buscadorPeliculas = async (req, res) => {
         res.status(500).json({ error: 'Ocurrió un error al buscar películas' });
     }
 }
+const movieDetails = async (req, res) => {
+    const { id } = req.query;
+
+    if (!id) {
+        return res.status(400).json({ error: 'Debes proporcionar un ID de película para obtener los detalles' });
+    }
+
+    try {
+        const response = await axios.get(
+            `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.APIKEY}`
+        );
+        const movieDetails = response.data;
+        res.json({
+            success: true,
+            message: `Detalles de la película con ID ${id}`,
+            data: movieDetails
+        });
+    } catch (error) {
+        console.error('Error al obtener los detalles de la película:', error.message);
+        res.status(500).json({ error: 'Ocurrió un error al obtener los detalles de la película' });
+    }
+};
+
+
 
 module.exports = {
     peliculasGet,
-    buscadorPeliculas
+    buscadorPeliculas,
+    movieDetails
 };
 

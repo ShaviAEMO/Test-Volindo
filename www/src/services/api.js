@@ -37,5 +37,23 @@ export async function searchMovies(query) {
     }
 }
 
+export async function getMovieDetails(movieId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/peliculas/movieDetails?id=${movieId}`);
+        const responseData = await response.json();
+
+        if (responseData.success) {
+            const movieDetails = responseData.data;
+            return movieDetails;
+        } else {
+            console.error('Error obteniendo detalles de la película:', responseData.message);
+            throw new Error(responseData.message);
+        }
+    } catch (error) {
+        console.error('getMovieDetails error:', error);
+        throw error;
+    }
+}
+
 
 

@@ -29,7 +29,6 @@ function MovieDetails({ movie }) {
                 <p>Original Language: {movie.original_language}</p>
                 <p>Vote Average: {movie.vote_average}</p>
                 <p>Vote Count: {movie.vote_count}</p>
-                {/* ... Other movie details */}
             </div>
         </div>
     );

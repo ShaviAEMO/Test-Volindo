@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPopularMovies, searchMovies } from '../services/api';
+import { getPopularMovies, searchMovies, getMovieDetails } from '../services/api';
 import MovieDetails from '../components/MovieDetails';
 
 function MovieDetailsPage() {
@@ -20,17 +20,18 @@ function MovieDetailsPage() {
                 }
                 setMovies(fetchedMovies);
 
-                // Find the selected movie based on the ID
-                const selectedMovie = fetchedMovies.find(movie => movie.id.toString() === id);
-                if (selectedMovie) {
-                    setMovieDetails(selectedMovie);
+                if (id) {
+                    if (!movieDetails.id || movieDetails.id.toString() !== id) {
+                        const selectedMovieDetails = await getMovieDetails(id);
+                        setMovieDetails(selectedMovieDetails);
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching movies:', error);
             }
         }
         fetchData();
-    }, [id, searchTerm]);
+    }, [id, searchTerm, movieDetails]);
 
     return (
         <div className="movie-details-page">
@@ -40,6 +41,7 @@ function MovieDetailsPage() {
 }
 
 export default MovieDetailsPage;
+
 
 
 
